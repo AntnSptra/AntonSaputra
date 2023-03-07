@@ -44,8 +44,9 @@
                                     <td>
                                         <form action="" method="post">
                                             @csrf
+                                            @method('GET')
                                             <a href="{{route('kategori.edit', $category->id)}}"  class="btn btn-outline-warning btn-sm">Edit Kategori</a>
-                                            <button type="submit" class="btn btn-outline-danger btn-sm">Hapus Kategori</button>
+                                            <a href="{{route('kategori.destroy', $category->id)}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Apakah Anda Yakin Menghapus Data?');">Hapus Kategori</a>
                                         </form>
                                     </td>
                                 </tr>
@@ -69,13 +70,26 @@
                                 <tr>
                                     <th>Kode Kategori</th>
                                     <th>Nama Kategori</th>
+                                    <th>Options</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse ($categorys as $category)
                                 <tr>
-                                    <td>KTG/20220403/001</td>
-                                    <td>Makanan Kemasan</td>
+                                    <td>{{$category->no_reg}}</td>
+                                    <td>{{$category->nama}}</td>
+                                    <td>
+                                        <form action="" method="post">
+                                            @csrf
+                                            @method('GET')
+                                            <a href="{{route('kategori.edit', $category->id)}}" class="btn btn-outline-warning btn-sm">Edit Kategori</a>
+                                            <a href="{{route('kategori.destroy', $category->id)}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Apakah Anda Yakin Menghapus Data?');">Hapus Kategori</a>
+                                        </form>
+                                    </td>
                                 </tr>
+                            @empty
+
+                            @endforelse
                             </tbody>
                         </table>
                     </div>

@@ -10,8 +10,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categorys = Category::paginate(5);
-        return view('kategori.index', compact('categorys'));
+       $categorys = Category::paginate(5);
+       return view('kategori.index', compact('categorys'));
     }
     public function store(Request $request)
     {
@@ -22,11 +22,27 @@ class CategoryController extends Controller
 
         return redirect()->back();
     }
-    public function edit($id)
+    public function edit (Request $request, $id)
     {
         $category = Category::findOrFail($id);
 
         return view('kategori.edit', compact('category'));
-        // return view('kategori.edit');
+        // return view('kategori.edit);
+    }
+
+    public function update (Request $request, Category $category)
+    {
+        // $category = Category::findOrFail($id);
+        $category->update($request->all());
+        // $category->update(['nama' => $request->nama]);
+
+        return redirect()->route('kategori');
+    }
+    public function destroy(Request $request, $id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete($request->all());
+
+        return redirect()->route('kategori');
     }
 }
