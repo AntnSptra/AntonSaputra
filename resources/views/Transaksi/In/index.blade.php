@@ -34,7 +34,7 @@
                             <td>{{$permintaan->created_at}}</td>
                             <td>{{$permintaan->total}}</td>
                             @role('gudang')
-                                @if ($permintaan->status != 'in')
+                                @if ($permintaan->status == 'in')
                                     <td class="d-flex">
                                         <form action="" method="post">
                                             @csrf

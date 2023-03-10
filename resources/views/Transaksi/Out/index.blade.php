@@ -3,10 +3,12 @@
 
 @section('content')
 <div class="container">
-    <div class="d-flex">
-        <p style="matgin-left: 2px; font-weight: bold;">Transaksi</p>
-        <p style="margin-left: 5px;">/ Barang Keluar</p>
-    </div>
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb bg-transparent d-flex align-items-center">
+            <li class="breadcrumb-item" aria-current="page">Transaksi</li>
+            <li class="breadcrumb-item active" aria-current="page">Barang Keluar</li>
+        </ol>
+    </nav>
     <div class="card border-0">
         <div class="card-body">
             <table class="table table-striped">
@@ -14,17 +16,28 @@
                     <tr>
                         <th>Refrensi</th>
                         <th>Supplier</th>
-                        <th>Status</th>
+                        <th>Quantity</th>
                         <th>Tanggal</th>
+                        <th>Status</th>
                         <th>Options</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @forelse ($permintaans as $permintaan)
+                        <tr>
+                            <td>{{$permintaan->koe_permintaan}}</td>
+                            <td>{{$permintaan->barang->brand->nama}}</td>
+                            <td>{{$permintaan->jumlah}}</td>
+                            <td>{{$permintaan->created_at}}</td>
+                            <td>{{$permintaan->total}}</td>
+                        </tr>
+                        @empty
 
+                    @endforelse
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-@endsection
+@endsection 
